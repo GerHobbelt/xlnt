@@ -2838,6 +2838,7 @@ void xlsx_producer::write_worksheet(const relationship &rel)
         {
             write_attribute("verticalDpi", ws.page_setup().vertical_dpi_.get());
         }
+        write_attribute("scale", ws.page_setup().scale());
         /*write_attribute("paperSize", static_cast<std::size_t>(ws.page_setup().paper_size()));
         write_attribute("fitToHeight", write_bool(ws.page_setup().fit_to_height()));
         write_attribute("fitToWidth", write_bool(ws.page_setup().fit_to_width()));*/

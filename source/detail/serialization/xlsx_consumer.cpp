@@ -1161,6 +1161,10 @@ worksheet xlsx_consumer::read_worksheet_end(const std::string &rel_id)
             {
                 setup.vertical_dpi_.set(parser().attribute<std::size_t>("verticalDpi"));
             }
+            if (parser().attribute_present("scale"))
+            {
+                setup.scale(parser().attribute<std::size_t>("scale"));
+            }
             ws.page_setup(setup);
             skip_remaining_content(current_worksheet_element);
         }

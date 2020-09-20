@@ -33,7 +33,7 @@ page_setup::page_setup()
       fit_to_page_(false),
       fit_to_height_(false),
       fit_to_width_(false),
-      scale_(1)
+      scale_(100)
 {
 }
 
@@ -97,12 +97,12 @@ void page_setup::fit_to_width(bool fit_to_width)
     fit_to_width_ = fit_to_width;
 }
 
-void page_setup::scale(double scale)
+void page_setup::scale(std::size_t scale)
 {
     scale_ = scale;
 }
 
-double page_setup::scale() const
+std::size_t page_setup::scale() const
 {
     return scale_;
 }
@@ -115,7 +115,7 @@ bool page_setup::operator==(const page_setup &rhs) const
         && fit_to_page_ == rhs.fit_to_page_
         && fit_to_height_ == rhs.fit_to_height_
         && fit_to_width_ == rhs.fit_to_width_
-        && detail::float_equals(scale_, rhs.scale_);
+        && scale_ == rhs.scale_;
 }
 
 } // namespace xlnt

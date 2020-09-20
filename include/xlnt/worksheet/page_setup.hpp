@@ -152,12 +152,12 @@ public:
     /// <summary>
     /// Sets the factor by which the page should be scaled during printing.
     /// </summary>
-    void scale(double scale);
+    void scale(std::size_t scale);
 
     /// <summary>
     /// Returns the factor by which the page should be scaled during printing.
     /// </summary>
-    double scale() const;
+    std::size_t scale() const;
 
     /// <summary>
     /// The orientation
@@ -208,7 +208,7 @@ private:
     /// <summary>
     /// The amount to scale the worksheet
     /// </summary>
-    double scale_;
+    std::size_t scale_;
 };
 
 } // namespace xlnt
