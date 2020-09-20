@@ -325,7 +325,7 @@ private:
         return *reinterpret_cast<const T *>(&storage_);
     }
 
-    bool has_value_;
+    bool has_value_ = false;
     typename std::aligned_storage<sizeof(T), alignof(T)>::type storage_;
 };
 
