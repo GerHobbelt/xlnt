@@ -106,7 +106,7 @@ bool float_equals(const LNumber &lhs, const RNumber &rhs,
 class number_serialiser
 {
     static constexpr int Excel_Digit_Precision = 15; //sf
-    bool should_convert_comma;
+    bool should_convert_comma = false;
 
     static void convert_comma_to_pt(char *buf, int len)
     {
@@ -138,7 +138,7 @@ public:
     // This matches the output format of excel irrespective of current locale
     std::string serialise(double d) const
     {
-        char buf[30];
+        char buf[30] = {};
         int len = snprintf(buf, sizeof(buf), "%.15g", d);
         if (should_convert_comma)
         {
@@ -164,14 +164,14 @@ public:
     {
         assert(!s.empty());
         assert(len_converted != nullptr);
-        char *end_of_convert;
+        char *end_of_convert = nullptr;
         if (!should_convert_comma)
         {
             double d = strtod(s.c_str(), &end_of_convert);
             *len_converted = end_of_convert - s.c_str();
             return d;
         }
-        char buf[30];
+        char buf[30] = {};
         assert(s.size() < sizeof(buf));
         auto copy_end = std::copy(s.begin(), s.end(), buf);
         convert_pt_to_comma(buf, static_cast<size_t>(copy_end - buf));
@@ -182,7 +182,7 @@ public:
 
     double deserialise(const std::string &s) const
     {
-        ptrdiff_t ignore;
+        ptrdiff_t ignore{};
         return deserialise(s, &ignore);
     }
 };

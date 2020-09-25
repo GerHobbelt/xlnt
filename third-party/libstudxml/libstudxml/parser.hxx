@@ -241,7 +241,7 @@ namespace xml
     struct attribute_value_type
     {
       std::string value;
-      mutable bool handled;
+      mutable bool handled = false;
     };
 
     typedef std::map<qname_type, attribute_value_type> attribute_map_type;

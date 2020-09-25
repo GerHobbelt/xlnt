@@ -326,7 +326,7 @@ private:
     }
 
     bool has_value_ = false;
-    typename std::aligned_storage<sizeof(T), alignof(T)>::type storage_;
+    typename std::aligned_storage<sizeof(T), alignof(T)>::type storage_{};
 };
 
 #ifdef XLNT_NOEXCEPT_VALUE_COMPAT
