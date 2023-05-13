@@ -327,7 +327,10 @@ private:
     }
 
     bool has_value_;
-    typename std::aligned_storage<sizeof(T), alignof(T)>::type storage_;
+    struct storage_t 
+    {
+        alignas(T) std::byte data[sizeof(T)];
+    } storage_;
 };
 
 #ifdef XLNT_NOEXCEPT_VALUE_COMPAT
