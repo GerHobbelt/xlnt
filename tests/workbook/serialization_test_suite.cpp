@@ -71,8 +71,10 @@ public:
         register_test(test_Issue445_inline_str_streaming_read);
         register_test(test_Issue492_stream_empty_row);
         register_test(test_Issue503_external_link_load);
+        register_test(test_Issue735_wrong_count);
         register_test(test_formatting);
         register_test(test_active_sheet);
+        register_test(test_named_range);
     }
 
     bool workbook_matches_file(xlnt::workbook &wb, const xlnt::path &file)
@@ -762,6 +764,13 @@ public:
         auto cell = ws.cell("A1");
         xlnt_assert_equals(cell.value<std::string>(), std::string("WDG_IC_00000003.aut"));
     }
+
+    void test_Issue735_wrong_count()
+    {
+        xlnt::workbook wb;
+        wb.load(path_helper::test_file("Issue735_wrong_count.xlsx"));
+        xlnt_assert_throws_nothing(wb.active_sheet());
+    }
     
     void test_formatting()
     {
@@ -807,6 +816,11 @@ public:
         xlnt::workbook wb;
         wb.load(path_helper::test_file("20_active_sheet.xlsx"));
         xlnt_assert_equals(wb.active_sheet(), wb[2]);
+    }
+
+    void test_named_range()
+    {
+        xlnt_assert(round_trip_matches_rw(path_helper::test_file("19_defined_names.xlsx")));
     }
 };
 
